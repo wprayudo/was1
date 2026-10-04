@@ -1,0 +1,21 @@
+services:
+  surrealdb:
+    image: surrealdb/surrealdb:v2.3.8
+    # The local named volume is created by Docker as root; run this dev-only
+    # container with matching ownership so RocksDB can initialize its files.
+    user: "0:0"
+    command: start --user root --pass root rocksdb:/data/genesis.db
+    ports:
+      - "8000:8000"
+    volumes:
+      - surreal-data:/data
+
+  zenoh:
+    image: eclipse/zenoh:1.5.1
+    profiles: [realtime]
+    command: ["-l", "tcp/0.0.0.0:7447"]
+    ports:
+      - "127.0.0.1:7447:7447"
+
+volumes:
+  surreal-data:

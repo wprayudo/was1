@@ -1,0 +1,19 @@
+[workspace]
+resolver = "2"
+members = [
+  "crates/genesis-core",
+  "crates/genesis-infrastructure",
+  "crates/genesis-application",
+  "crates/genesis-interfaces",
+]
+
+[workspace.package]
+edition = "2021"
+license = "Apache-2.0"
+version = "0.1.0"
+
+[workspace.dependencies]
+serde = { version = "1", features = ["derive"] }
+thiserror = "2"
+uuid = { version = "1", features = ["v4", "v5", "serde"] }
+chrono = { version = "0.4", features = ["serde"] }
